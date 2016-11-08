@@ -1,7 +1,9 @@
-package cmpt305project;
+package GetData;
 
+import com.google.gson.Gson;
 import java.io.*;
 import java.net.*;
+import org.json.simple.JSONObject;
 
 
 public class GetData {
@@ -20,13 +22,22 @@ public class GetData {
     }
     
     public static void main(String[] args) throws MalformedURLException, IOException {
-        //Will require the stringbuilder class to construct a url. Currently hardcoded for female from Canada
-        
-        String urlToRead = "http://api.nobelprize.org/v1/laureate.json?";
-        SearchSelection howToJava  = new SearchSelection();
-        howToJava.setGender("male");
-        howToJava.setbornCountryCode("ca");
-        urlToRead+=howToJava.getQueryString();
+        //Laureate examples:
+        String urlToRead = "http://api.nobelprize.org/v1/laureate.json?bornCountry=Canada&gender=female";
         System.out.println(getData(urlToRead));
+        Gson gson = new Gson();
+        String urlToRead2 = "http://api.nobelprize.org/v1/laureate.json?bornCountry=ireland&gender=male";
+        System.out.println(getData(urlToRead2));
+        //Prize examples:
+        String urlToRead3 = "http://api.nobelprize.org/v1/prize.json?year=1996&numberOfLaureates=3";
+        System.out.println(getData(urlToRead3));
+        String urlToRead4 = "http://api.nobelprize.org/v1/prize.json?year=1996&yearTo=2016&category=physics&numberOfLaureates=3";
+        System.out.println(getData(urlToRead4));
+        //Country code
+        String urlToRead5 = "http://api.nobelprize.org/v1/country.json";
+        System.out.println(getData(urlToRead5));
+
+        //gson.fromJson(getData(urlToRead), String);
+        //JSONObject json = new JSONObject(getData(urlToRead));
     }
 }
